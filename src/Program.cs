@@ -43,24 +43,66 @@ var activities = new Dictionary<string, Activity>
 {
     ["Chess Club"] = new Activity
     {
-        Description = "Learn strategies and compete in chess tournaments",
+        Description = "Learn to play and compete in chess tournaments",
         Schedule = "Fridays, 3:30 PM - 5:00 PM",
         MaxParticipants = 12,
-        Participants = new List<string> { "michael@mergington.edu", "daniel@mergington.edu" }
+        Participants = ["michael@mergington.edu", "daniel@mergington.edu"]
     },
     ["Programming Class"] = new Activity
     {
         Description = "Learn programming fundamentals and build software projects",
         Schedule = "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
         MaxParticipants = 20,
-        Participants = new List<string> { "emma@mergington.edu", "sophia@mergington.edu" }
+        Participants = ["emma@mergington.edu", "sophia@mergington.edu"]
     },
     ["Gym Class"] = new Activity
     {
         Description = "Physical education and sports activities",
         Schedule = "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         MaxParticipants = 30,
-        Participants = new List<string> { "john@mergington.edu", "olivia@mergington.edu" }
+        Participants = ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    ["Basketball Team"] = new Activity
+    {
+        Description = "Join the school basketball team and compete in inter-school games",
+        Schedule = "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
+        MaxParticipants = 15,
+        Participants = ["james@mergington.edu", "alex@mergington.edu"]
+    },
+    ["Swimming Club"] = new Activity
+    {
+        Description = "Develop swimming skills and train for competitions",
+        Schedule = "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 20,
+        Participants = ["sarah@mergington.edu", "ethan@mergington.edu"]
+    },
+    ["Art Studio"] = new Activity
+    {
+        Description = "Explore various art mediums including painting, drawing, and sculpture",
+        Schedule = "Thursdays, 3:30 PM - 5:30 PM",
+        MaxParticipants = 15,
+        Participants = ["lily@mergington.edu", "noah@mergington.edu"]
+    },
+    ["Theater Club"] = new Activity
+    {
+        Description = "Develop acting skills and perform in school productions",
+        Schedule = "Wednesdays and Fridays, 3:30 PM - 5:30 PM",
+        MaxParticipants = 25,
+        Participants = ["ava@mergington.edu", "liam@mergington.edu"]
+    },
+    ["Debate Team"] = new Activity
+    {
+        Description = "Develop critical thinking and public speaking through competitive debates",
+        Schedule = "Tuesdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 16,
+        Participants = ["isabella@mergington.edu", "william@mergington.edu"]
+    },
+    ["Science Club"] = new Activity
+    {
+        Description = "Conduct experiments and explore scientific concepts through hands-on projects",
+        Schedule = "Thursdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 18,
+        Participants = ["mia@mergington.edu", "benjamin@mergington.edu"]
     }
 };
 
@@ -78,13 +120,49 @@ app.MapPost("/api/activities/{activityName}/signup", (string activityName, Signu
 
     var activity = activities[activityName];
 
+    // Validate student is not already signed up
+    if (activity.Participants.Contains(request.Email))
+    {
+        return Results.BadRequest(new { detail = "Student is already signed up for this activity" });
+    }
+
+    // Validate activity is not full
+    if (activity.Participants.Count >= activity.MaxParticipants)
+    {
+        return Results.BadRequest(new { detail = "Activity is full" });
+    }
     // Add student
     activity.Participants.Add(request.Email);
     return Results.Ok(new { message = $"Signed up {request.Email} for {activityName}" });
 })
     .WithName("SignupForActivity");
 
+app.MapDelete("/api/activities/{activityName}/participants/{email}", (string activityName, string email) =>
+{
+    // Validate activity exists
+    if (!activities.ContainsKey(activityName))
+    {
+        return Results.NotFound(new { detail = "Activity not found" });
+    }
+
+    var activity = activities[activityName];
+
+    // Validate participant exists
+    if (!activity.Participants.Contains(email))
+    {
+        return Results.NotFound(new { detail = "Participant not found in this activity" });
+    }
+
+    // Remove participant
+    activity.Participants.Remove(email);
+    return Results.Ok(new { message = $"Removed {email} from {activityName}" });
+})
+    .WithName("RemoveParticipant");
+
 // SPA fallback - serve index.html for client-side routes
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+// Make Program class accessible for testing
+public partial class Program { }
