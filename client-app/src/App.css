@@ -149,6 +149,13 @@ h3 {
   transform: scale(1);
 }
 
+.delete-btn:focus {
+  outline: 2px solid #764ba2;
+  outline-offset: 2px;
+  /* Alternatively, you can use box-shadow for a more custom look:
+  box-shadow: 0 0 0 3px #764ba255;
+  */
+}
 .no-participants {
   color: #999;
   font-style: italic;

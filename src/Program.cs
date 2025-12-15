@@ -126,6 +126,11 @@ app.MapPost("/api/activities/{activityName}/signup", (string activityName, Signu
         return Results.BadRequest(new { detail = "Student is already signed up for this activity" });
     }
 
+    // Validate activity is not full
+    if (activity.Participants.Count >= activity.MaxParticipants)
+    {
+        return Results.BadRequest(new { detail = "Activity is full" });
+    }
     // Add student
     activity.Participants.Add(request.Email);
     return Results.Ok(new { message = $"Signed up {request.Email} for {activityName}" });
