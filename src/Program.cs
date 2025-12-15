@@ -61,6 +61,48 @@ var activities = new Dictionary<string, Activity>
         Schedule = "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         MaxParticipants = 30,
         Participants = new List<string> { "john@mergington.edu", "olivia@mergington.edu" }
+    },
+    ["Basketball Team"] = new Activity
+    {
+        Description = "Join the school basketball team and compete in inter-school games",
+        Schedule = "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
+        MaxParticipants = 15,
+        Participants = new List<string> { "james@mergington.edu", "alex@mergington.edu" }
+    },
+    ["Swimming Club"] = new Activity
+    {
+        Description = "Develop swimming skills and train for competitions",
+        Schedule = "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 20,
+        Participants = new List<string> { "sarah@mergington.edu", "ethan@mergington.edu" }
+    },
+    ["Art Studio"] = new Activity
+    {
+        Description = "Explore various art mediums including painting, drawing, and sculpture",
+        Schedule = "Thursdays, 3:30 PM - 5:30 PM",
+        MaxParticipants = 15,
+        Participants = new List<string> { "lily@mergington.edu", "noah@mergington.edu" }
+    },
+    ["Theater Club"] = new Activity
+    {
+        Description = "Develop acting skills and perform in school productions",
+        Schedule = "Wednesdays and Fridays, 3:30 PM - 5:30 PM",
+        MaxParticipants = 25,
+        Participants = new List<string> { "ava@mergington.edu", "liam@mergington.edu" }
+    },
+    ["Debate Team"] = new Activity
+    {
+        Description = "Develop critical thinking and public speaking through competitive debates",
+        Schedule = "Tuesdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 16,
+        Participants = new List<string> { "isabella@mergington.edu", "william@mergington.edu" }
+    },
+    ["Science Club"] = new Activity
+    {
+        Description = "Conduct experiments and explore scientific concepts through hands-on projects",
+        Schedule = "Thursdays, 3:30 PM - 5:00 PM",
+        MaxParticipants = 18,
+        Participants = new List<string> { "mia@mergington.edu", "benjamin@mergington.edu" }
     }
 };
 
@@ -77,6 +119,12 @@ app.MapPost("/api/activities/{activityName}/signup", (string activityName, Signu
     }
 
     var activity = activities[activityName];
+
+    // Validate student is not already signed up
+    if (activity.Participants.Contains(request.Email))
+    {
+        return Results.BadRequest(new { detail = "Student is already signed up for this activity" });
+    }
 
     // Add student
     activity.Participants.Add(request.Email);
