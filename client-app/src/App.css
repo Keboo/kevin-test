@@ -117,18 +117,36 @@ h3 {
   color: #333;
   font-size: 0.95rem;
   transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .participants-list li:hover {
   background: linear-gradient(90deg, #667eea25 0%, #764ba225 100%);
-  transform: translateX(2px);
 }
 
-.participants-list li::before {
-  content: "✓";
-  color: #667eea;
-  font-weight: bold;
-  margin-right: 0.5rem;
+.participant-email {
+  flex: 1;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.5rem;
+  transition: transform 0.2s;
+  opacity: 0.6;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.delete-btn:active {
+  transform: scale(1);
 }
 
 .no-participants {

@@ -132,7 +132,32 @@ app.MapPost("/api/activities/{activityName}/signup", (string activityName, Signu
 })
     .WithName("SignupForActivity");
 
+app.MapDelete("/api/activities/{activityName}/participants/{email}", (string activityName, string email) =>
+{
+    // Validate activity exists
+    if (!activities.ContainsKey(activityName))
+    {
+        return Results.NotFound(new { detail = "Activity not found" });
+    }
+
+    var activity = activities[activityName];
+
+    // Validate participant exists
+    if (!activity.Participants.Contains(email))
+    {
+        return Results.NotFound(new { detail = "Participant not found in this activity" });
+    }
+
+    // Remove participant
+    activity.Participants.Remove(email);
+    return Results.Ok(new { message = $"Removed {email} from {activityName}" });
+})
+    .WithName("RemoveParticipant");
+
 // SPA fallback - serve index.html for client-side routes
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+// Make Program class accessible for testing
+public partial class Program { }

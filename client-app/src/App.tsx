@@ -75,6 +75,28 @@ function App() {
     }
   };
 
+  const handleRemoveParticipant = async (activityName: string, email: string) => {
+    try {
+      const response = await fetch(`/api/activities/${encodeURIComponent(activityName)}/participants/${encodeURIComponent(email)}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove participant');
+      }
+
+      // Refresh activities to show updated participant list
+      const activitiesResponse = await fetch('/api/activities');
+      const updatedActivities = await activitiesResponse.json();
+      setActivities(updatedActivities);
+    } catch (err) {
+      setMessage({ 
+        text: err instanceof Error ? err.message : 'Failed to remove participant', 
+        type: 'error' 
+      });
+    }
+  };
+
   if (loading) return <div>Loading activities...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -100,7 +122,17 @@ function App() {
                   {activity.participants.length > 0 ? (
                     <ul className="participants-list">
                       {activity.participants.map((participant, index) => (
-                        <li key={index}>{participant}</li>
+                        <li key={index}>
+                          <span className="participant-email">{participant}</span>
+                          <button 
+                            className="delete-btn"
+                            onClick={() => handleRemoveParticipant(name, participant)}
+                            aria-label={`Remove ${participant}`}
+                            title="Remove participant"
+                          >
+                            🗑️
+                          </button>
+                        </li>
                       ))}
                     </ul>
                   ) : (
