@@ -46,63 +46,63 @@ var activities = new Dictionary<string, Activity>
         Description = "Learn strategies and compete in chess tournaments",
         Schedule = "Fridays, 3:30 PM - 5:00 PM",
         MaxParticipants = 12,
-        Participants = new List<string> { "michael@mergington.edu", "daniel@mergington.edu" }
+        Participants = ["michael@mergington.edu", "daniel@mergington.edu"]
     },
     ["Programming Class"] = new Activity
     {
         Description = "Learn programming fundamentals and build software projects",
         Schedule = "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
         MaxParticipants = 20,
-        Participants = new List<string> { "emma@mergington.edu", "sophia@mergington.edu" }
+        Participants = ["emma@mergington.edu", "sophia@mergington.edu"]
     },
     ["Gym Class"] = new Activity
     {
         Description = "Physical education and sports activities",
         Schedule = "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         MaxParticipants = 30,
-        Participants = new List<string> { "john@mergington.edu", "olivia@mergington.edu" }
+        Participants = ["john@mergington.edu", "olivia@mergington.edu"]
     },
     ["Basketball Team"] = new Activity
     {
         Description = "Join the school basketball team and compete in inter-school games",
         Schedule = "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
         MaxParticipants = 15,
-        Participants = new List<string> { "james@mergington.edu", "alex@mergington.edu" }
+        Participants = ["james@mergington.edu", "alex@mergington.edu"]
     },
     ["Swimming Club"] = new Activity
     {
         Description = "Develop swimming skills and train for competitions",
         Schedule = "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
         MaxParticipants = 20,
-        Participants = new List<string> { "sarah@mergington.edu", "ethan@mergington.edu" }
+        Participants = ["sarah@mergington.edu", "ethan@mergington.edu"]
     },
     ["Art Studio"] = new Activity
     {
         Description = "Explore various art mediums including painting, drawing, and sculpture",
         Schedule = "Thursdays, 3:30 PM - 5:30 PM",
         MaxParticipants = 15,
-        Participants = new List<string> { "lily@mergington.edu", "noah@mergington.edu" }
+        Participants = ["lily@mergington.edu", "noah@mergington.edu"]
     },
     ["Theater Club"] = new Activity
     {
         Description = "Develop acting skills and perform in school productions",
         Schedule = "Wednesdays and Fridays, 3:30 PM - 5:30 PM",
         MaxParticipants = 25,
-        Participants = new List<string> { "ava@mergington.edu", "liam@mergington.edu" }
+        Participants = ["ava@mergington.edu", "liam@mergington.edu"]
     },
     ["Debate Team"] = new Activity
     {
         Description = "Develop critical thinking and public speaking through competitive debates",
         Schedule = "Tuesdays, 3:30 PM - 5:00 PM",
         MaxParticipants = 16,
-        Participants = new List<string> { "isabella@mergington.edu", "william@mergington.edu" }
+        Participants = ["isabella@mergington.edu", "william@mergington.edu"]
     },
     ["Science Club"] = new Activity
     {
         Description = "Conduct experiments and explore scientific concepts through hands-on projects",
         Schedule = "Thursdays, 3:30 PM - 5:00 PM",
         MaxParticipants = 18,
-        Participants = new List<string> { "mia@mergington.edu", "benjamin@mergington.edu" }
+        Participants = ["mia@mergington.edu", "benjamin@mergington.edu"]
     }
 };
 
