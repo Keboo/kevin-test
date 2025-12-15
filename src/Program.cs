@@ -43,7 +43,7 @@ var activities = new Dictionary<string, Activity>
 {
     ["Chess Club"] = new Activity
     {
-        Description = "Learn strategies and compete in chess tournaments",
+        Description = "Learn to play and compete in chess tournaments",
         Schedule = "Fridays, 3:30 PM - 5:00 PM",
         MaxParticipants = 12,
         Participants = ["michael@mergington.edu", "daniel@mergington.edu"]
